@@ -86,7 +86,8 @@ func (m GelfMessage) getExtraFields() (json.RawMessage, error) {
 
 	extra := map[string]interface{}{
 		"_container_id":   m.Container.ID,
-		"_container_name": m.Container.Name[1:], // might be better to use strings.TrimLeft() to remove the first /
+		// "_container_name": m.Container.Name[1:], // might be better to use strings.TrimLeft() to remove the first /
+		"_container_name": m.Container.Config.Hostname,
 		"_image_id":       m.Container.Image,
 		"_image_name":     m.Container.Config.Image,
 		"_command":        strings.Join(m.Container.Config.Cmd[:], " "),
