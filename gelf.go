@@ -93,12 +93,10 @@ func (m GelfMessage) getExtraFields() (json.RawMessage, error) {
 		"_command":        strings.Join(m.Container.Config.Cmd[:], " "),
 		"_created":        m.Container.Created,
 	}
- 
-  underscore := '_';
 
 	for name, label := range m.Container.Config.Labels {
 		if len(name) > 10 && strings.ToLower(name[0:10]) == "io.rancher" {
-			extra[name[:]] = string(underscore)+label
+			extra[name[:]] = label
 		}
 	}
 	// for name, label := range m.Container.Config.Labels {
